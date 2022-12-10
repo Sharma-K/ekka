@@ -16,7 +16,7 @@ router.route('/login')
 
 router.get('/about-us', user.aboutUs);
 
-router.get('/whishlist', user.whishlist);
+router.get('/wishlist', user.wishlist);
 
 router.get('/logout', user.logout);
 

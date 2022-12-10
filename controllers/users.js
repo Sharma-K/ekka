@@ -11,15 +11,15 @@ module.exports.login = (req, res)=>{
 module.exports.register =(req,res) => {
     res.render('register');
 }
-module.exports.whishlist =(req,res)=> {
-    res.render('whishlist');
+module.exports.wishlist =(req,res)=> {
+    res.render('wishlist');
 }
 module.exports.aboutUs = (req, res) => {
     res.render('about-us');
 }
 
 module.exports.pregister = async(req,res)=>{
-    console.log('***************');
+    // console.log('***************');
 
     try{
 
@@ -55,7 +55,7 @@ module.exports.pregister = async(req,res)=>{
             ec_select_state,
             password,
         });
-console.log('*****users******', user);
+// console.log('*****users******', user);
 
 const registeredUser = await User.register(user, password);
 req.login(registeredUser, function(err) {
