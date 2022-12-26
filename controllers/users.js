@@ -1,3 +1,4 @@
+const Products = require('../models/Products');
 const User = require('../models/User');
 
 
@@ -88,4 +89,17 @@ module.exports.logout = (req, res, next) => {
        
         res.redirect('/');
       });
+}
+
+
+module.exports.cart = (req, res) =>{
+    res.render('cart');
+}
+
+module.exports.addcart = async(req, res)=>{
+
+    const {id} = req.params;
+
+    const product = await Products.findById(id);
+    console.log(product);
 }

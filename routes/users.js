@@ -20,4 +20,8 @@ router.get('/wishlist', user.wishlist);
 
 router.get('/logout', user.logout);
 
+router.get('/cart', user.cart);
+
+router.get('/:id/addcart', user.addcart);
+
 module.exports = router

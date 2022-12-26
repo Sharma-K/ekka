@@ -15,6 +15,7 @@ const MongoDBStore = require('connect-mongo');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/users');
+const Product = require('./models/Products');
 
 
 const User = require('./models/User');
@@ -82,9 +83,10 @@ app.use((req, res, next)=> {
 
 app.use('/user/', userRoutes);
 
-app.get('/', (req, res)=>{
-   
-    res.render('index');
+app.get('/', async(req, res)=>{
+    const products = await Product.find({});
+    
+    res.render('index',{products});
 })
 
 

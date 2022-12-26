@@ -38,9 +38,19 @@ const ProductSchema = new Schema({
         type: Number,
         default: 0
     },
+    description: {
+        type: String
+    },
     reviews: {
         type: Schema.Types.ObjectId,
         ref: 'Review'
+    },
+    timeStamp: {
+        type: String
+    },
+    purchased: {
+        type: Number,
+        default: 0
     }
 
 })
