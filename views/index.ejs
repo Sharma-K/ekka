@@ -208,7 +208,7 @@
                                 <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                     <div class="header-icon"><img src="/images/icons/cart.svg"
                                             class="svg_img header_svg" alt="" /></div>
-                                    <span class="ec-header-count cart-count-lable">3</span>
+                                    <span class="ec-header-count cart-count-lable"><%=cart.length%></span>
                                 </a>
                                 <!-- Header Cart End -->
                             </div>
@@ -764,6 +764,23 @@
                     <button class="ec-close">×</button>
                 </div>
                 <ul class="eccart-pro-items">
+
+                   <% for(let c of cart) {%>
+
+                    <li>
+                        <a href="product-left-sidebar.html" class="sidekka_pro_img"><img
+                            src="<%=c.images[0].url%>" alt="product"></a>
+                    <div class="ec-pro-content">
+                        <a href="product-left-sidebar.html" class="cart_pro_title"><%=c.title  %></a>
+                        <span class="cart-price"><span><%=c.price  %> </span> x 1</span>
+                        <div class="qty-plus-minus">
+                            <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                        </div>
+                        <a href="javascript:void(0)" class="remove">×</a>
+                    </div>
+                    </li>
+                    
+                    <% } %> 
                     
                 </ul>
             </div>

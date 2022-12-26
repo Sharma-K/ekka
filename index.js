@@ -16,9 +16,8 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/users');
 const Product = require('./models/Products');
-
-
 const User = require('./models/User');
+const Cart = require('./models/Cart');
 
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/ekka'
@@ -85,8 +84,9 @@ app.use('/user/', userRoutes);
 
 app.get('/', async(req, res)=>{
     const products = await Product.find({});
+    const cart = await Cart.find({});
     
-    res.render('index',{products});
+    res.render('index',{products, cart});
 })
 
 

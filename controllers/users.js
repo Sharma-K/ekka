@@ -1,6 +1,6 @@
 const Products = require('../models/Products');
 const User = require('../models/User');
-
+const Cart = require('../models/Cart');
 
 module.exports.index = (req, res) =>{
     res.render('index');
@@ -101,5 +101,13 @@ module.exports.addcart = async(req, res)=>{
     const {id} = req.params;
 
     const product = await Products.findById(id);
-    console.log(product);
+    const cart = new Cart({
+        title: product.title,
+        price: product.price,
+        description: product.description
+        
+    })
+    cart.images = product.images;
+    await cart.save();
+    res.redirect('/');
 }
