@@ -92,8 +92,9 @@ module.exports.logout = (req, res, next) => {
 }
 
 
-module.exports.cart = (req, res) =>{
-    res.render('cart');
+module.exports.cart = async(req, res) =>{
+    const carts = await Cart.find({})
+    res.render('cart', {carts});
 }
 
 module.exports.addcart = async(req, res)=>{
