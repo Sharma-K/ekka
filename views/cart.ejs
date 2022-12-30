@@ -124,7 +124,7 @@
                             <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                 <div class="header-icon"><img src="/images/icons/cart.svg"
                                         class="svg_img header_svg" alt="" /></div>
-                                <span class="ec-header-count cart-count-lable">3</span>
+                                <span class="ec-header-count cart-count-lable"><%=carts.length%></span>
                             </a>
                             <!-- Header Cart End -->
                             <!-- Header menu Start -->
@@ -192,7 +192,7 @@
                                 <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                     <div class="header-icon"><img src="/images/icons/cart.svg"
                                             class="svg_img header_svg" alt="" /></div>
-                                    <span class="ec-header-count cart-count-lable">3</span>
+                                    <span class="ec-header-count cart-count-lable"><%=carts.length %></span>
                                 </a>
                                 <!-- Header Cart End -->
                             </div>
@@ -740,42 +740,21 @@
                     <button class="ec-close">×</button>
                 </div>
                 <ul class="eccart-pro-items">
+                    <% for(let c of carts) {%> 
                     <li>
                         <a href="product-left-sidebar.html" class="sidekka_pro_img"><img
-                                src="/images/product-image/6_1.jpg" alt="product"></a>
+                                src="<%=c.images[0].url%>" alt="product"></a>
                         <div class="ec-pro-content">
-                            <a href="product-left-sidebar.html" class="cart_pro_title">T-shirt For Women</a>
-                            <span class="cart-price"><span>$76.00</span> x 1</span>
+                            <a href="product-left-sidebar.html" class="cart_pro_title"><%=c.title  %> </a>
+                            <span class="cart-price"><span><%=c.price  %> </span> x <%=c.qty%> </span>
                             <div class="qty-plus-minus">
                                 <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
                             </div>
                             <a href="javascript:void(0)" class="remove">×</a>
                         </div>
                     </li>
-                    <li>
-                        <a href="product-left-sidebar.html" class="sidekka_pro_img"><img
-                                src="/images/product-image/12_1.jpg" alt="product"></a>
-                        <div class="ec-pro-content">
-                            <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
-                            <span class="cart-price"><span>$64.00</span> x 1</span>
-                            <div class="qty-plus-minus">
-                                <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                            </div>
-                            <a href="javascript:void(0)" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="product-left-sidebar.html" class="sidekka_pro_img"><img
-                                src="/images/product-image/3_1.jpg" alt="product"></a>
-                        <div class="ec-pro-content">
-                            <a href="product-left-sidebar.html" class="cart_pro_title">Girls Nylon Purse</a>
-                            <span class="cart-price"><span>$59.00</span> x 1</span>
-                            <div class="qty-plus-minus">
-                                <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
-                            </div>
-                            <a href="javascript:void(0)" class="remove">×</a>
-                        </div>
-                    </li>
+                    <% } %> 
+                   
                 </ul>
             </div>
             <div class="ec-cart-bottom">
@@ -839,7 +818,7 @@
                     <div class="ec-cart-content">
                         <div class="ec-cart-inner">
                             <div class="row">
-                                <form action="#">
+                                <form action="/user/checkout" method="post">
                                     <div class="table-content cart-table-content">
                                         <table>
                                             <thead>
@@ -852,89 +831,38 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
+
+                                                <% for(let c of carts) {%> 
                                                 <tr>
                                                     <td data-label="Product" class="ec-cart-pro-name"><a
                                                             href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                src="/images/product-image/1.jpg"
-                                                                alt="" />Stylish Baby Shoes</a></td>
+                                                                src="<%=c.images[0].url%>"
+                                                                alt="" /><%=c.title  %> </a></td>
                                                     <td data-label="Price" class="ec-cart-pro-price"><span
-                                                            class="amount">$56.00</span></td>
+                                                            class="amount"><%=c.price  %> </span></td>
                                                     <td data-label="Quantity" class="ec-cart-pro-qty"
                                                         style="text-align: center;">
-                                                        <div class="cart-qty-plus-minus">
-                                                            <input class="cart-plus-minus" type="text"
-                                                                name="cartqtybutton" value="1" />
+                                                        <div class="cart-plus-minus" >
+                                                            <%=c.qty  %> 
+                                                            <!-- <input class="cart-plus-minus" type="text" name="cartqtybutton" value="<%=c.qty%>" onclick="incdec(this)" /> -->
                                                         </div>
+                                                         
                                                     </td>
-                                                    <td data-label="Total" class="ec-cart-pro-subtotal">$56.00</td>
+                                                    <td data-label="Total" class="ec-cart-pro-subtotal"><%=c.price*c.qty  %> </td>
                                                     <td data-label="Remove" class="ec-cart-pro-remove">
-                                                        <a href="#"><i class="ecicon eci-trash-o"></i></a>
+                                                        <a href="/user/<%=c._id %>/deleteCart"><i class="ecicon eci-trash-o"></i></a>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td data-label="Product" class="ec-cart-pro-name"><a
-                                                            href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                src="/images/product-image/2.jpg"
-                                                                alt="" />Unisex Fully Solid Hoodie</a></td>
-                                                    <td data-label="Price" class="ec-cart-pro-price"><span
-                                                            class="amount">$75.00</span></td>
-                                                    <td data-label="Quantity" class="ec-cart-pro-qty"
-                                                        style="text-align: center;">
-                                                        <div class="cart-qty-plus-minus">
-                                                            <input class="cart-plus-minus" type="text"
-                                                                name="cartqtybutton" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td data-label="Total" class="ec-cart-pro-subtotal">$75.00</td>
-                                                    <td data-label="Remove" class="ec-cart-pro-remove">
-                                                        <a href="#"><i class="ecicon eci-trash-o"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td data-label="Product" class="ec-cart-pro-name"><a
-                                                            href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                src="/images/product-image/3.jpg"
-                                                                alt="" />Beautiful T-shirt For Women</a></td>
-                                                    <td data-label="Price" class="ec-cart-pro-price"><span
-                                                            class="amount">$48.00</span></td>
-                                                    <td data-label="Quantity" class="ec-cart-pro-qty"
-                                                        style="text-align: center;">
-                                                        <div class="cart-qty-plus-minus">
-                                                            <input class="cart-plus-minus" type="text"
-                                                                name="cartqtybutton" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td data-label="Total" class="ec-cart-pro-subtotal">$48.00</td>
-                                                    <td data-label="Remove" class="ec-cart-pro-remove">
-                                                        <a href="#"><i class="ecicon eci-trash-o"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td data-label="Product" class="ec-cart-pro-name"><a
-                                                            href="product-left-sidebar.html"><img class="ec-cart-pro-img mr-4"
-                                                                src="/images/product-image/4.jpg"
-                                                                alt="" />Wool Hat For Men</a></td>
-                                                    <td data-label="Price" class="ec-cart-pro-price"><span
-                                                            class="amount">$95.00</span></td>
-                                                    <td data-label="Quantity" class="ec-cart-pro-qty"
-                                                        style="text-align: center;">
-                                                        <div class="cart-qty-plus-minus">
-                                                            <input class="cart-plus-minus" type="text"
-                                                                name="cartqtybutton" value="1" />
-                                                        </div>
-                                                    </td>
-                                                    <td data-label="Total" class="ec-cart-pro-subtotal">$95.00</td>
-                                                    <td data-label="Remove" class="ec-cart-pro-remove">
-                                                        <a href="#"><i class="ecicon eci-trash-o"></i></a>
-                                                    </td>
-                                                </tr>
+                                                <% } %> 
+                                           
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="ec-cart-update-bottom">
-                                                <a href="#">Continue Shopping</a>
+                                                <a href="/">Continue Shopping</a>
                                                 <button class="btn btn-primary">Check Out</button>
                                             </div>
                                         </div>
@@ -1873,6 +1801,11 @@
     <script>
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+    <script>
+        function incdec(e){
+            console.log(e);
         }
     </script>
     <!-- Main Js -->

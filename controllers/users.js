@@ -94,6 +94,8 @@ module.exports.logout = (req, res, next) => {
 
 module.exports.cart = async(req, res) =>{
     const carts = await Cart.find({})
+
+    console.log(carts);
     res.render('cart', {carts});
 }
 
@@ -101,14 +103,50 @@ module.exports.addcart = async(req, res)=>{
 
     const {id} = req.params;
 
+    
+    let check = false;
     const product = await Products.findById(id);
-    const cart = new Cart({
+    pId = product._id.toString();
+
+    const prevCarts = await Cart.findOne({product: id});
+    
+
+    if(prevCarts)
+    {
+        let quantity = prevCarts.qty;
+
+        console.log('inside check', quantity);
+        const c =  await Cart.findOneAndUpdate({product: id},{qty: quantity +1} );
+        console.log(c);
+        res.redirect('/');
+    }
+else
+    {const cart = new Cart({
         title: product.title,
         price: product.price,
-        description: product.description
+        description: product.description,
+        product: product._id
         
     })
+    
+    
     cart.images = product.images;
+    cart.total = cart.price*cart.qty;
     await cart.save();
     res.redirect('/');
+}
+}
+
+module.exports.deleteCart = async(req, res)=>{
+    const {id} = req.params;
+
+     await Cart.findByIdAndDelete(id);
+
+     res.redirect('/user/cart');
+
+}
+
+module.exports.checkout = async(req, res)=>{
+    console.log(req.body);
+
 }

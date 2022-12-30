@@ -24,4 +24,8 @@ router.get('/cart', user.cart);
 
 router.get('/:id/addcart', user.addcart);
 
+router.get('/:id/deleteCart', user.deleteCart);
+
+router.post('/checkout', user.checkout);
+
 module.exports = router

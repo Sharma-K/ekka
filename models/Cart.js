@@ -7,9 +7,9 @@ const ImageSchema = new Schema({
 
 
 const CartSchema = new Schema({
-    pid: {
+    product: {
         type: Schema.Types.ObjectId,
-        ref: 'Product'
+    
     },
     title: {
         type: String
@@ -24,7 +24,10 @@ const CartSchema = new Schema({
         type: Number,
         default:1
     },
-    images: [ImageSchema]
+    images: [ImageSchema],
+    total: {
+        type: Number    
+    }
 })
 
 module.exports = mongoose.model('cart', CartSchema);
