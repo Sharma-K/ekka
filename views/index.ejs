@@ -772,11 +772,11 @@
                             src="<%=c.images[0].url%>" alt="product"></a>
                     <div class="ec-pro-content">
                         <a href="product-left-sidebar.html" class="cart_pro_title"><%=c.title  %></a>
-                        <span class="cart-price"><span><%=c.price  %> </span> x 1</span>
+                        <span class="cart-price"><span><%=c.price  %> </span> x <%=c.qty  %> </span>
                         <div class="qty-plus-minus">
                             <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
                         </div>
-                        <a href="javascript:void(0)" class="remove">×</a>
+                        <a href="/<%=c._id%>/deleteCart" class="remove">×</a>
                     </div>
                     </li>
                     

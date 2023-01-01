@@ -826,7 +826,7 @@
                                                     <th>Product</th>
                                                     <th>Price</th>
                                                     <th style="text-align: center;">Quantity</th>
-                                                    <th>Total</th>
+                                                    
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -843,13 +843,16 @@
                                                             class="amount"><%=c.price  %> </span></td>
                                                     <td data-label="Quantity" class="ec-cart-pro-qty"
                                                         style="text-align: center;">
-                                                        <div class="cart-plus-minus" >
-                                                            <%=c.qty  %> 
-                                                            <!-- <input class="cart-plus-minus" type="text" name="cartqtybutton" value="<%=c.qty%>" onclick="incdec(this)" /> -->
+                                                        <div class="plus-minus" >
+                                                
+                                                            <input class="cart-plus-minus" type="number" name="cartqtybutton" value="1" />
+                                                             
+                                                        
                                                         </div>
+                                                    
                                                          
                                                     </td>
-                                                    <td data-label="Total" class="ec-cart-pro-subtotal"><%=c.price*c.qty  %> </td>
+                                                   
                                                     <td data-label="Remove" class="ec-cart-pro-remove">
                                                         <a href="/user/<%=c._id %>/deleteCart"><i class="ecicon eci-trash-o"></i></a>
                                                     </td>
@@ -1804,9 +1807,15 @@
         }
     </script>
     <script>
-        function incdec(e){
-            console.log(e);
-        }
+       var qty=1;
+    console.log(qty);
+       
+   var c  = document.querySelector('.cart-plus-minus');
+   console.log(c);
+   c.addEventListener('change', function(e){
+    qty = e.target.value;
+   })
+ 
     </script>
     <!-- Main Js -->
     <script src="/js/vendor/index.js"></script>

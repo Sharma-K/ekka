@@ -104,7 +104,7 @@ module.exports.addcart = async(req, res)=>{
     const {id} = req.params;
 
     
-    let check = false;
+   
     const product = await Products.findById(id);
     pId = product._id.toString();
 
@@ -113,11 +113,6 @@ module.exports.addcart = async(req, res)=>{
 
     if(prevCarts)
     {
-        let quantity = prevCarts.qty;
-
-        console.log('inside check', quantity);
-        const c =  await Cart.findOneAndUpdate({product: id},{qty: quantity +1} );
-        console.log(c);
         res.redirect('/');
     }
 else
